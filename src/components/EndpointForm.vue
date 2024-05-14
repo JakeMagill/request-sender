@@ -1,7 +1,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { RequestTypes } from '../enums/RequestTypes';
-import { RequestColors } from '../enums/Colors';
+import { setRequestColour } from '../helpers/requestColourHelper'
+import { RequestTypes } from '../enums/RequestTypes'
+import { formSubmission } from '../types/formSubmission'
+
 
 export default defineComponent({
     name: 'EndpointForm',
@@ -12,31 +14,18 @@ export default defineComponent({
     data() {
         return {
             RequestTypes,
-            RequestColors,
-            requestType: RequestTypes.GET, 
-            requestColorClass: RequestColors.GET,
+            requestType: '',
+            requestColorClass: '',
             requestEndpoint: '',
         }
     },
+    beforeMount() {
+        this.requestType = RequestTypes.GET,
+        this.requestColorClass = setRequestColour(this.requestType)
+    },
     methods: {
         setEndpontColor() {
-            switch(this.requestType) {
-                case RequestTypes.GET:
-                    this.requestColorClass = RequestColors.GET
-                    break
-                case RequestTypes.POST:
-                    this.requestColorClass = RequestColors.POST
-                    break
-                case RequestTypes.PUT:
-                    this.requestColorClass = RequestColors.PUT
-                    break
-                case RequestTypes.PATCH:
-                    this.requestColorClass = RequestColors.PATCH
-                    break
-                case RequestTypes.DELETE:
-                    this.requestColorClass = RequestColors.DELETE
-                    break
-            }
+            this.requestColorClass = setRequestColour(this.requestType)
         },
         submitEndpoint() {
             const url = new URL(this.requestEndpoint)

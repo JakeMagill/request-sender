@@ -1,4 +1,4 @@
-type submissionResponse = {
+export type submissionResponse = {
     responseJson: string;
     responseStatus: number;
 }
