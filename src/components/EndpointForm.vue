@@ -5,7 +5,7 @@ import { RequestTypes } from '../enums/RequestTypes'
 import { setRequestColour } from '../helpers/requestColourHelper'
 import type { formSubmission } from '../types/formSubmission'
  
-const emits = defineEmits(['FORM_SUBMITTED'])
+const emits = defineEmits(['formSubmitted'])
 
 const requestType = ref('');
 const requestEndpoint = ref('');
@@ -25,7 +25,7 @@ function submitEndpoint() {
         endPoint: url
     }
 
-    emits('FORM_SUBMITTED', submission)
+    emits('formSubmitted', submission)
 }
 </script>
 

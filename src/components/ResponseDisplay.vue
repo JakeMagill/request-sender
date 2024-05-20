@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import JsonViewer from 'vue-json-viewer'
+import Section from './Section.vue';
 
 const props = defineProps<{
     isError: Boolean,
@@ -9,9 +10,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div class="w-full border rounded-md mt-6 p-2">
-        <p class="text-gray-400">Response</p>
-        <div v-if="isError" class="text-red-500">{{ response }}</div>
-       <JsonViewer v-if="response != ''" :value="response" :copyable="true" :expanded="true" />
-    </div>
+    <Section :title="'Response'">
+        <JsonViewer v-if="response != ''" :value="response" :copyable="true" :expanded="true" />
+    </Section>
 </template>

@@ -1,37 +1,24 @@
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 import EndpointForm  from './components/EndpointForm.vue'
 import ResponseDisplay from './components/ResponseDisplay.vue'
 import HeaderSection from './components/HeadersSection.vue'
-
 import type { formSubmission } from './types/formSubmission'
 
-export default defineComponent({
-  components: {
-    EndpointForm,
-    ResponseDisplay,
-    HeaderSection,
-  },
-  data() {
-    return {
-      submissionError: false,
-      submissionResponse: ''
-    }
-  },
-  methods: {
-    sendRequest(request: formSubmission){
-      fetch(request.endPoint.href, {
-        method: request.type
-      })
-      .then((result) => result.json())
-      .then((data) => this.submissionResponse = data)
-      .catch((error) => {
-        this.submissionError = true
-        this.submissionResponse = error
-      })
-    }
-  }
-})
+const submissionError = ref(false);
+const submissionResponse = ref('');
+
+function sendRequest(request: formSubmission){
+  fetch(request.endPoint.href, {
+    method: request.type
+  })
+  .then((result) => result.json())
+  .then((data) => submissionResponse.value = data)
+  .catch((error) => {
+    submissionError.value = true
+    submissionResponse.value = error
+  })
+}
 </script>
 
 <template>
