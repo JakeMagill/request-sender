@@ -4,6 +4,8 @@ import EndpointForm  from './components/EndpointForm.vue'
 import ResponseDisplay from './components/ResponseDisplay.vue'
 import HeaderSection from './components/HeadersSection.vue'
 
+import type { formSubmission } from './types/formSubmission'
+
 export default defineComponent({
   components: {
     EndpointForm,

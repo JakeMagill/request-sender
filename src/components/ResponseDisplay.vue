@@ -1,17 +1,11 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import JsonViewer from 'vue-json-viewer'
 
-export default defineComponent({
-    name: 'ResponseDisplay',
-    components: {
-        JsonViewer,
-    },
-    props: {
-        isError: Boolean,
-        response: String,
-    }
-})
+const props = defineProps<{
+    isError: Boolean,
+    response: String
+}>()
+
 </script>
 
 <template>

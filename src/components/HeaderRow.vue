@@ -1,31 +1,25 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { ref, defineEmits } from 'vue'
 
-export default defineComponent({
-    name: 'HeadersSection',
-    emits: ['UPDATE_HEADER'],
-    props: {
-        id: Number,
-    },
-    data() {
-        return {
-            id: this.id,
-            headerKey: '',
-            headerValue: '',
-            enabled: true,
-        }
-    },
-    methods: {
-        updateHeader() {
-            this.$emit('UPDATE_HEADER', {
-                id: this.id,
-                key: this.headerKey,
-                value: this.headerValue,
-                enabled: this.enabled
-            })
-        }
-    }
-})
+const props = defineProps<{
+    id: Number
+}>()
+
+const id = props.id;
+const headerKey = ref('');
+const headerValue = ref('');
+const enabled = ref(true);
+
+const emit = defineEmits(['UPDATE_HEADER'])
+
+function updateHeader() {
+    emit('UPDATE_HEADER', {
+        id: id,
+        key: headerKey.value,
+        value: headerValue.value,
+        enabled: enabled.value
+    })
+}
 </script>
 
 <template>

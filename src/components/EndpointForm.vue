@@ -1,44 +1,32 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { setRequestColour } from '../helpers/requestColourHelper'
-import { RequestTypes } from '../enums/RequestTypes'
-import { formSubmission } from '../types/formSubmission'
+<script setup lang="ts">
+import { ref, defineEmits, onBeforeMount } from 'vue'
 import { store } from '../store'
+import { RequestTypes } from '../enums/RequestTypes'
+import { setRequestColour } from '../helpers/requestColourHelper'
+import type { formSubmission } from '../types/formSubmission'
+ 
+const emits = defineEmits(['FORM_SUBMITTED'])
 
+const requestType = ref('');
+const requestEndpoint = ref('');
 
-export default defineComponent({
-    name: 'EndpointForm',
-    emits: ['formSubmitted'],
-    prpos: {
-        isError: Boolean
-    },
-    data() {
-        return {
-            store,
-            RequestTypes,
-            requestType: '',
-            requestColorClass: '',
-            requestEndpoint: '',
-        }
-    },
-    beforeMount() {
-        this.requestType = RequestTypes.GET
-    },
-    methods: {
-        setEndpontColor() {
-            store.requestColor = setRequestColour(this.requestType)
-        },
-        submitEndpoint() {
-            const url = new URL(this.requestEndpoint)
-            const submission: formSubmission = {
-                type: this.requestType,
-                endPoint: url
-            }
-
-            this.$emit('formSubmitted', submission)
-        }
-    }
+onBeforeMount(() => {
+    requestType.value = RequestTypes.GET
 })
+
+function setEndpontColor() {
+    store.requestColor = setRequestColour(requestType.value)
+}
+
+function submitEndpoint() {
+    const url = new URL(requestEndpoint.value)
+    const submission: formSubmission = {
+        type: requestType.value,
+        endPoint: url
+    }
+
+    emits('FORM_SUBMITTED', submission)
+}
 </script>
 
 <template>

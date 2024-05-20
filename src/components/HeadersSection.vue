@@ -1,44 +1,25 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { HeaderRecord } from '../types/HeaderRecord'
+<script setup lang="ts">
+import { ref } from 'vue'
 import { store } from '../store'
 import HeaderRow from './HeaderRow.vue'
 import Section from './Section.vue'
 
-export default defineComponent({
-    name: 'HeadersSection',
-    components: {
-        Section,
-        HeaderRow
-    },
-    data() {
-        return {
-            store,
-            headersDisabled: false,
-            headers: [] as HeaderRecord[]
-        }
-    },
-    mounted() {
-        this.addHeader()
-    },
-    methods: {
-        addHeader() {
-            this.headers.push({
-                key: '',
-                value: '',
-                enabled: true
-            } as HeaderRecord)
-        },
-        toggleHeaders() {
-            this.headersDisabled = !this.headersDisabled
-        }
-    }
-})
+import type { HeaderRecord } from '../types/headerRecord'
+
+const headers = ref([] as HeaderRecord[]);
+
+function addHeader() {
+    headers.value.push({
+        key: '',
+        value: '',
+        enabled: true
+    } as HeaderRecord)
+}
 
 </script>
 
 <template>
-    <Section>
+    <Section :title="'Headers'">
         <template v-slot:default="{isDisabled}">
             <div v-show="!isDisabled">
                 <HeaderRow v-for="(item, index) in headers" :id="index" />
