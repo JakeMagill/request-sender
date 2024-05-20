@@ -7,9 +7,6 @@ export default defineComponent({
     components: {
         JsonViewer,
     },
-    data() {
-        body: ''
-    },
     props: {
         isError: Boolean,
         response: String,
@@ -19,6 +16,8 @@ export default defineComponent({
 
 <template>
     <div class="w-full border rounded-md mt-6 p-2">
-       <JsonViewer :value="response" :copyable="true" :expanded="true" />
+        <p class="text-gray-400">Response</p>
+        <div v-if="isError" class="text-red-500">{{ response }}</div>
+       <JsonViewer v-if="response != ''" :value="response" :copyable="true" :expanded="true" />
     </div>
 </template>

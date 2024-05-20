@@ -1,28 +1,21 @@
 import { RequestTypes } from '../enums/RequestTypes';
 import { RequestColors } from '../enums/Colors';
 
-const setRequestColour = (requestType: string) => {
-    let requestColorClass = '';
-
+const setRequestColour = (requestType: string):RequestColors => {
     switch(requestType) {
         case RequestTypes.GET:
-            requestColorClass = RequestColors.GET
-            break
+            return RequestColors.GET
         case RequestTypes.POST:
-            requestColorClass = RequestColors.POST
-            break
+            return RequestColors.POST
         case RequestTypes.PUT:
-            requestColorClass = RequestColors.PUT
-            break
+            return RequestColors.PUT
         case RequestTypes.PATCH:
-            requestColorClass = RequestColors.PATCH
-            break
+            return RequestColors.PATCH
         case RequestTypes.DELETE:
-            requestColorClass = RequestColors.DELETE
-            break
+            return RequestColors.DELETE
+        default:
+            return RequestColors.GET
     }
-
-    return requestColorClass
 }
 
 export { setRequestColour }

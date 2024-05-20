@@ -5,7 +5,7 @@ export default defineComponent({
     name: 'HeadersSection',
     emits: ['UPDATE_HEADER'],
     props: {
-        id: Number
+        id: Number,
     },
     data() {
         return {
@@ -29,9 +29,10 @@ export default defineComponent({
 </script>
 
 <template>
-    <div class="flex no-wrap m-2 border rounded-md">
-        <input class="w-1/3 m-2" type="text" placeholder="key" v-model="headerKey" />
-        <input class="w-1/3 m-2" type="text" placeholder="value" v-model="headerValue" />
-        <input class="m-2" type="checkbox" v-model="enabled">
+    <div class="flex no-wrap m-2">
+        <input class="w-1/2 p-2 mr-2 border rounded-md" type="text" placeholder="key" :disabled="!enabled" v-model="headerKey" />
+        <input class="w-1/2 p-2 mr-2 border rounded-md" type="text" placeholder="value" :disabled="!enabled" v-model="headerValue" />
+        <input type="checkbox" v-model="enabled">
+        <hr>
     </div>
 </template>
