@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, defineEmits, onBeforeMount } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 import { store } from '../store'
 import { RequestTypes } from '../enums/RequestTypes'
 import { setRequestColour } from '../helpers/requestColourHelper'

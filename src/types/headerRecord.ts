@@ -1,5 +1,5 @@
 export type HeaderRecord = {
-    id: Number;
+    id: number;
     key: string;
     value: string;
     enabled: boolean;

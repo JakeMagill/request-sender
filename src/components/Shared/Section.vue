@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, defineProps } from 'vue'
-import { store } from '../store'
+import { ref } from 'vue'
+import { store } from '../../store'
 
-const props = defineProps<{
+defineProps<{
     title: String
 }>()
 
