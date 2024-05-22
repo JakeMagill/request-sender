@@ -1,33 +1,36 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { store } from './store';
 import EndpointForm  from './components/EndpointForm.vue'
-import ResponseSection from './components/ResponseSection.vue'
-import HeaderSection from './components/Headers/HeadersSection.vue'
+import ResponseSection from './components/Sections/ResponseSection.vue'
+import HeaderSection from './components/Sections/HeadersSection.vue'
+import QueryParamSection from './components/Sections/QueryParamSection.vue'
+import AuthSection from './components/Sections/AuthSection.vue';
+import { useRequestStore } from './stores/requestStore';
+import { useResponseStore } from './stores/responseStore';
+
 import type { formSubmission } from './types/formSubmission'
+
+const requestStore = useRequestStore();
+const responseStore = useResponseStore();
 
 const submissionError = ref(false);
 const submissionResponse = ref('');
 
-function sendRequest(request: formSubmission){
-  const headers = store.headers.map((header) => {
-        return {
-            key: header.key,
-            value: header.value
-        }
-    });
+function sendRequest(request: formSubmission): void{
+  console.log(requestStore.requestHeaders)
 
   fetch(request.endPoint.href, {
     method: request.type, 
-    headers: headers.map(header => [header.key, header.value]),
+    headers: requestStore.requestHeaders,
   })
   .then((result) => {
-    store.responseStatusCode = result.status;
+    responseStore.statusCode = result.status;
+    responseStore.statusText = result.statusText;
     return result.json();
   })
   .then((data) => submissionResponse.value = data)
   .catch((error) => {
-    store.responseError = error;
+    responseStore.error = error;
   })
 }
 </script>
@@ -37,9 +40,11 @@ function sendRequest(request: formSubmission){
     <div class="flex flex-column w-1/5 h-full pl-6">
     </div>
     <div class="flex flex-wrap  w-4/5 p-6">
-      <EndpointForm :is-Error="submissionError" @formSubmitted="sendRequest"/>
+      <EndpointForm @submitted="sendRequest"/>
+      <AuthSection />
       <HeaderSection />
-      <ResponseSection :isError="submissionError" :response="submissionResponse"/>
+      <QueryParamSection />
+      <ResponseSection :isError="submissionError" :response="submissionResponse" />
     </div>
   </div>
 </template>

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import HeaderRow from './HeaderRow.vue'
-import Section from '../Shared/Section.vue'
+import HeaderRow from '../Headers/HeaderRow.vue'
+import BaseSection from './Base/BaseSection.vue'
 import { useRequestStore } from '../../stores/requestStore'
 
 import type { HeaderRecord } from '../../types/headerRecord'
 
-const count = ref(0);
 const store = useRequestStore();
+const count = ref(store.headers.length + 1);
 
 function addHeader() {
     store.addHeader({
@@ -22,7 +22,7 @@ function addHeader() {
 </script>
 
 <template>
-    <Section :title="'Headers'">
+    <BaseSection :title="'Headers'">
         <template v-slot:default="{isDisabled}">
             <div v-show="!isDisabled">
                 <HeaderRow v-for="item in store.headers" :header="item" @UPDATE_HEADER="store.updateHeader"/>
@@ -31,5 +31,5 @@ function addHeader() {
                 </div>
             </div>
         </template>
-    </Section>
+    </BaseSection>
 </template>

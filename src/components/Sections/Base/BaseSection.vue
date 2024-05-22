@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { store } from '../../store'
+import { useRequestStore } from '../../../stores/requestStore';
 
 defineProps<{
     title: String
 }>()
 
+const store = useRequestStore()
 const isDisabled = ref(false)
 
 function toggleSection() {
