@@ -18,6 +18,6 @@ defineProps<{
                 <p> {{ store.statusText }} </p>
                 <p> {{ store.statusCode }} </p>
             </div>
-            <JsonViewer v-show="store.responseJson != ''" v-if="response != ''" :value="response" :copyable="true" :expanded="true" />
+            <JsonViewer v-show="response != ''" v-if="response != ''" :value="response" :copyable="true" :expanded="true" />
     </BaseSection>
 </template>
