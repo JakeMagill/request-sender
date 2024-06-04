@@ -6,7 +6,7 @@ import { QueryParameter } from '../types/queryParameter';
 
 export const useRequestStore = defineStore('requst', () => {
     // State
-    const url = ref('');
+    //const url = ref('');
     const requestColor = ref(RequestColors.GET);
 
     const headers: Ref<HeaderRecord[]> = ref([
