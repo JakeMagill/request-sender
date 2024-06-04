@@ -14,12 +14,10 @@ defineProps<{
 
 <template>
     <BaseSection :title="'Response'">
-        <template v-slot:default="{isDisabled}">
             <div v-show="store.statusCode > 0" class="flex nowrap justify-between p-2">
                 <p> {{ store.statusText }} </p>
                 <p> {{ store.statusCode }} </p>
             </div>
-            <JsonViewer v-show="!isDisabled" v-if="response != ''" :value="response" :copyable="true" :expanded="true" />
-        </template>
+            <JsonViewer v-show="store.responseJson != ''" v-if="response != ''" :value="response" :copyable="true" :expanded="true" />
     </BaseSection>
 </template>

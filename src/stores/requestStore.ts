@@ -26,14 +26,14 @@ export const useRequestStore = defineStore('requst', () => {
     }]);
 
     // Getters
-    const requestUrl = computed(() => {
-        const queryString = queryParameters.value
-            .filter((qp: QueryParameter) => qp.enabled)
-            .map((qp: QueryParameter) => `${qp.key}=${qp.value}`)
-            .join('&');
+    // const requestUrl = computed(() => {
+    //     const queryString = queryParameters.value
+    //         .filter((qp: QueryParameter) => qp.enabled)
+    //         .map((qp: QueryParameter) => `${qp.key}=${qp.value}`)
+    //         .join('&');
 
-        return `${url.value}?${queryString}`;
-    });
+    //     return `${url.value}?${queryString}`;
+    // });
 
     const requestHeaders = computed((): Record<string, string> => {
         const enabledHeaders = headers.value.filter((h: HeaderRecord) => h.enabled);

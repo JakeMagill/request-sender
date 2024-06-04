@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRequestStore } from '../../../stores/requestStore';
+import { useRequestStore } from '../../../stores/requestStore'
 
 defineProps<{
     title: String
@@ -21,6 +21,8 @@ function toggleSection() {
             <a v-show="!isDisabled" :class="`text${store.requestColor}`" class="cursor-pointer p-2" @click="toggleSection">Hide</a>
             <a v-show="isDisabled" :class="`text${store.requestColor}`" class="cursor-pointer p-2" @click="toggleSection">Show</a>
         </div>
-        <slot :isDisabled="isDisabled"></slot>
+        <div v-show="!isDisabled">
+            <slot></slot>
+        </div>
     </div>
 </template>
