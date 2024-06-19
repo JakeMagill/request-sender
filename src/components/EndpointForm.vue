@@ -29,12 +29,10 @@ function submitEndpoint() {
 <template>
     <div :class="`border${store.requestColor}`" class="flex flex-nowrap text-center border-2 rounded-md p-2 w-full">
         <select :class="`text${store.requestColor}`" class="font-bold" v-model="requestType" @change="setEndpontColor()">
-            <option :value="RequestTypes.GET">GET</option>
-            <option :value="RequestTypes.POST">POST</option>
-            <option :value="RequestTypes.PUT">PUT</option>
-            <option :value="RequestTypes.PATCH">PATCH</option>
-            <option :value="RequestTypes.DELETE">DELETE</option>
-      </select>
+            <option v-for="(type, index) in RequestTypes" :key="index" :value="type">
+                {{ type }}
+            </option>
+        </select>
     <input v-model="requestEndpoint" class="w-full mx-2" type="text" placeholder="https://">
     <button :class="`bg${store.requestColor}`" class="p-2 px-4 mx-2 rounded-md text-white hover:opacity-85 transition-opacity" @click="submitEndpoint">Send</button>
   </div>

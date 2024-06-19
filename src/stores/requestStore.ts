@@ -1,13 +1,14 @@
 import { defineStore } from 'pinia'
 import { Ref, ref, computed } from 'vue'
 import { HeaderRecord } from '../types/headerRecord';
-import { RequestColors } from '../enums/Colors';
+import { RequestColors } from '../enums/RequestColors';
 import { QueryParameter } from '../types/queryParameter';
 
 export const useRequestStore = defineStore('requst', () => {
     // State
     //const url = ref('');
     const requestColor = ref(RequestColors.GET);
+    const headerCount = ref(0);
 
     const headers: Ref<HeaderRecord[]> = ref([
         {
@@ -57,6 +58,10 @@ export const useRequestStore = defineStore('requst', () => {
     function updateHeader(header: HeaderRecord) {
         const headerIndex = headers.value.findIndex((h: HeaderRecord) => h.id === header.id);
 
+        if (headerIndex < 0){
+            addHeader(header);
+        }
+
         headers.value[headerIndex].key = header.key;
         headers.value[headerIndex].value = header.value;
         headers.value[headerIndex].enabled = header.enabled;
@@ -65,7 +70,10 @@ export const useRequestStore = defineStore('requst', () => {
     }
 
     function addHeader(header: HeaderRecord){
+        header.id = headerCount.value;
         headers.value.push(header);
+
+        headerCount.value++;
     }
 
     return { 

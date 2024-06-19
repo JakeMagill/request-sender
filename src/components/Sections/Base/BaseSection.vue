@@ -12,6 +12,11 @@ const isDisabled = ref(false)
 function toggleSection() {
     isDisabled.value = !isDisabled.value
 }
+
+function enableSection() {
+    isDisabled.value = true
+}
+
 </script>
 
 <template>
@@ -22,7 +27,7 @@ function toggleSection() {
             <a v-show="isDisabled" :class="`text${store.requestColor}`" class="cursor-pointer p-2" @click="toggleSection">Show</a>
         </div>
         <div v-show="!isDisabled">
-            <slot></slot>
+            <slot :enableSection="enableSection"></slot>
         </div>
     </div>
 </template>

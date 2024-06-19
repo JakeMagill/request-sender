@@ -1,5 +1,5 @@
 import { RequestTypes } from '../enums/RequestTypes';
-import { RequestColors } from '../enums/Colors';
+import { RequestColors } from '../enums/RequestColors';
 
 const setRequestColour = (requestType: string):RequestColors => {
     switch(requestType) {

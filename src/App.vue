@@ -6,15 +6,14 @@ import HeaderSection from './components/Sections/HeadersSection.vue'
 import QueryParamSection from './components/Sections/QueryParamSection.vue'
 import AuthSection from './components/Sections/AuthSection.vue';
 import { useRequestStore } from './stores/requestStore';
-import { useResponseStore } from './stores/responseStore';
 
 import type { formSubmission } from './types/formSubmission'
 
 const requestStore = useRequestStore();
-const responseStore = useResponseStore();
 
-const submissionError = ref(false);
 const submissionResponse = ref('');
+const statusCode = ref(0);
+const statusText = ref('');
 
 function sendRequest(request: formSubmission): void{
   console.log(requestStore.requestHeaders)
@@ -24,27 +23,25 @@ function sendRequest(request: formSubmission): void{
     headers: requestStore.requestHeaders,
   })
   .then((result) => {
-    responseStore.statusCode = result.status;
-    responseStore.statusText = result.statusText;
+    statusCode.value = result.status;
+    statusText.value = result.statusText;
     return result.json();
   })
   .then((data) => submissionResponse.value = data)
-  .catch((error) => {
-    responseStore.error = error;
-  })
+  .catch(() => submissionResponse.value = '');
 }
 </script>
 
 <template>
   <div class="flex flex-column flex-wrap justify-center items-center">
-    <div class="flex flex-column w-1/5 h-full pl-6">
+    <div class="flex flex-column w-1/3 h-full pl-6">
     </div>
-    <div class="flex flex-wrap  w-4/5 p-6">
+    <div class="flex flex-wrap  w-2/3 p-6">
       <EndpointForm @submitted="sendRequest"/>
       <AuthSection />
       <HeaderSection />
       <QueryParamSection />
-      <ResponseSection :isError="submissionError" :response="submissionResponse" />
+      <ResponseSection :response="submissionResponse" :statusCode="statusCode" :statusText="statusText"/>
     </div>
   </div>
 </template>

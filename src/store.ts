@@ -1,5 +1,5 @@
 import { reactive } from 'vue';
-import { RequestColors } from './enums/Colors'
+import { RequestColors } from './enums/RequestColors'
 import { HeaderRecord } from './types/headerRecord';
 
 export const store = reactive({
