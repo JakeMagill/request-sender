@@ -4,7 +4,7 @@ import BasicAuth from '../Auth/BasicAuth.vue';
 import { AuthTypes } from '../../enums/AuthTypes';
 import { useRequestStore } from '../../stores/requestStore';
 import { HeaderRecord } from '../../types/headerRecord';
-import { reactive } from 'vue';
+import { watch } from 'vue';
 
 const store = useRequestStore();
 
@@ -13,9 +13,16 @@ var authType = defineModel({
     default: AuthTypes.BASIC
 });
 
-function addAuthHeader(headerValue: string) {
-    console.log('Adding auth header', headerValue);
+watch(authType, (newValue) => {
+    if(newValue === AuthTypes.NO_AUTH) {
+        const headerindex = store.state.headers.findIndex((h: HeaderRecord) => h.key === 'Authorization');
+        if(headerindex > -1) {
+            store.removeHeader(headerindex)
+        }
+    }
+});
 
+function addAuthHeader(headerValue: string) {
     let authHeader: HeaderRecord = {} as HeaderRecord;
 
     if(authType.value === AuthTypes.BASIC) {

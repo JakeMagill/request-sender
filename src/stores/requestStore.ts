@@ -73,10 +73,16 @@ export const useRequestStore = defineStore('requst', () => {
         state.headersCount++;
     }
 
+    function removeHeader(headerId: number){
+        const headerIndex = state.headers.findIndex((h: HeaderRecord) => h.id === headerId);
+        state.headers.splice(headerIndex, 1);
+    }
+
     return { 
         state,
         requestHeaders,
         updateHeader, 
-        addHeader, 
+        addHeader,
+        removeHeader
     }
 });
