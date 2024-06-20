@@ -22,7 +22,7 @@ function addHeader() {
 <template>
     <BaseSection :title="'Headers'">
             <div>
-                <HeaderRow v-for="item in headers" :key="item.value" :header="item"  @UPDATE_HEADER="store.updateHeader"/>
+                <HeaderRow v-for="item in headers" :key="item.id" :header="item"  @UPDATE_HEADER="store.updateHeader"/>
                 <div class="flex justify-center">
                     <DefaultButton @click="addHeader">Add Header</DefaultButton>
                 </div>
