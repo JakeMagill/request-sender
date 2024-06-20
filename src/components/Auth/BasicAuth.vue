@@ -19,6 +19,6 @@ function createBasicAuthHeader() {
         <input @blur="createBasicAuthHeader" type="text" v-model="username" />
 
         <span>Password</span>
-        <input type="password" v-model="password" />
+        <input @blur="createBasicAuthHeader" type="password" v-model="password" />
     </div>
 </template>

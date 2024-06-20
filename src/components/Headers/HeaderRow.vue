@@ -8,13 +8,14 @@ const props = defineProps<{
 
 const emits = defineEmits(['UPDATE_HEADER'])
 
+const headerId = ref(props.header.id);
 const headerKey = ref(props.header.key);
 const headerValue = ref(props.header.value);
 const enabled = ref(props.header.enabled);
 
 function updateHeader() {
     emits('UPDATE_HEADER', {
-        id: props.header.id,
+        id: headerId.value,
         key: headerKey.value,
         value: headerValue.value,
         enabled: enabled.value

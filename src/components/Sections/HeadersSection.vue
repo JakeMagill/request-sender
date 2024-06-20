@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed } from 'vue'
 import HeaderRow from '../Headers/HeaderRow.vue'
 import BaseSection from './Base/BaseSection.vue'
 import { useRequestStore } from '../../stores/requestStore'
@@ -8,24 +8,21 @@ import DefaultButton from '../Shared/DefaultButton.vue'
 import type { HeaderRecord } from '../../types/headerRecord'
 
 const store = useRequestStore();
-const count = ref(store.headers.length + 1);
+const headers = computed(() => store.state.headers)
 
 function addHeader() {
     store.addHeader({
-        id: count.value,
         key: '',
         value: '',
         enabled: true
-    } as HeaderRecord)
-
-    count.value++
+    } as HeaderRecord )
 }
 </script>
 
 <template>
     <BaseSection :title="'Headers'">
             <div>
-                <HeaderRow v-for="item in store.headers" :header="item" @UPDATE_HEADER="store.updateHeader"/>
+                <HeaderRow v-for="item in headers" :key="item.value" :header="item"  @UPDATE_HEADER="store.updateHeader"/>
                 <div class="flex justify-center">
                     <DefaultButton @click="addHeader">Add Header</DefaultButton>
                 </div>

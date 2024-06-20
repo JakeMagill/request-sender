@@ -1,30 +1,26 @@
 import { defineStore } from 'pinia'
-import { Ref, ref, computed } from 'vue'
+import { computed, reactive, toRefs } from 'vue'
 import { HeaderRecord } from '../types/headerRecord';
 import { RequestColors } from '../enums/RequestColors';
-import { QueryParameter } from '../types/queryParameter';
+
+interface RequestStoreState {
+    headers: HeaderRecord[];
+    headersCount: number;
+    requestColor: RequestColors;
+}
 
 export const useRequestStore = defineStore('requst', () => {
-    // State
-    //const url = ref('');
-    const requestColor = ref(RequestColors.GET);
-    const headerCount = ref(0);
 
-    const headers: Ref<HeaderRecord[]> = ref([
-        {
+    const state: RequestStoreState = reactive({
+        headers: [{
             id: 0,
             key: 'Content-Type',
             value: 'application/json',
             enabled: true
-        },
-    ]);
-
-    const queryParameters: Ref<QueryParameter[]> = ref([{
-        id: 0,
-        key: '',
-        value: '',
-        enabled: true
-    }]);
+        }],
+        headersCount: 1,
+        requestColor: RequestColors.GET
+    });
 
     // Getters
     // const requestUrl = computed(() => {
@@ -36,8 +32,9 @@ export const useRequestStore = defineStore('requst', () => {
     //     return `${url.value}?${queryString}`;
     // });
 
+
     const requestHeaders = computed((): Record<string, string> => {
-        const enabledHeaders = headers.value.filter((h: HeaderRecord) => h.enabled);
+        const enabledHeaders = state.headers.filter((h: HeaderRecord) => h.enabled);
     
         const mappedHeaders: Record<string, string> = enabledHeaders.reduce((acc: Record<string, string>, h: HeaderRecord) => {
             acc[h.key] = h.value;
@@ -48,41 +45,38 @@ export const useRequestStore = defineStore('requst', () => {
     });
 
     // Actions
-    function addQueryParameter(key: string, value: string) {
-        queryParameters.value = {
-            ...queryParameters.value,
-            [key]: value
-        }
-    }
 
-    function updateHeader(header: HeaderRecord) {
-        const headerIndex = headers.value.findIndex((h: HeaderRecord) => h.id === header.id);
+    function updateHeader(updatedHeader: HeaderRecord) {
+        let headerIndex = state.headers.findIndex((h: HeaderRecord) => h.id === updatedHeader.id);
 
-        if (headerIndex < 0){
-            addHeader(header);
+        if (headerIndex === -1){
+            headerIndex = state.headers.findIndex((h: HeaderRecord) => h.key === updatedHeader.key);
+
+            if (headerIndex === -1){
+                addHeader(updatedHeader);
+            }
         }
 
-        headers.value[headerIndex].key = header.key;
-        headers.value[headerIndex].value = header.value;
-        headers.value[headerIndex].enabled = header.enabled;
+        console.log(headerIndex);
 
-        console.log('Updated header:', headers.value[headerIndex]);
+        updatedHeader.id = state.headersCount;
+        state.headers.splice(headerIndex, 1, updatedHeader);
+        
+        state.headersCount++;
     }
 
     function addHeader(header: HeaderRecord){
-        header.id = headerCount.value;
-        headers.value.push(header);
-
-        headerCount.value++;
+        console.log('Adding header:', header);
+        header.id = state.headersCount;
+        state.headers.push(header);
+        
+        state.headersCount++;
     }
 
     return { 
-        requestColor, 
-        headers,
-        queryParameters, 
+        state,
         requestHeaders,
         updateHeader, 
         addHeader, 
-        addQueryParameter 
     }
 });

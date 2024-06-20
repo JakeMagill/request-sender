@@ -9,7 +9,7 @@ const store = useRequestStore();
 <template>
     <BaseSection :title="'Query Parameters'">
             <div class="flex justify-center">
-                <DefaultButton @click="store.addQueryParameter">Add Query Param</DefaultButton>
+                <DefaultButton @click="">Add Query Param</DefaultButton>
             </div>
     </BaseSection>
 </template>

@@ -4,12 +4,13 @@ import BasicAuth from '../Auth/BasicAuth.vue';
 import { AuthTypes } from '../../enums/AuthTypes';
 import { useRequestStore } from '../../stores/requestStore';
 import { HeaderRecord } from '../../types/headerRecord';
+import { reactive } from 'vue';
 
 const store = useRequestStore();
 
 var authType = defineModel({
     type: String,
-    default: AuthTypes.NO_AUTH
+    default: AuthTypes.BASIC
 });
 
 function addAuthHeader(headerValue: string) {
