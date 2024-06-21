@@ -14,11 +14,12 @@ function createBasicAuthHeader() {
 </script>
 
 <template>
-    <div class="flex nowrap w-full">
-        <span>Username</span>
-        <input @blur="createBasicAuthHeader" type="text" v-model="username" />
-
-        <span>Password</span>
-        <input @blur="createBasicAuthHeader" type="password" v-model="password" />
+    <div class="flex flex-col w-full">
+        <div class="">
+            <input class="w-full p-2 border-2 rounded-md mb-2" @blur="createBasicAuthHeader" type="text" v-model="username" placeholder="Username"/>
+        </div>
+        <div>
+            <input class="w-full p-2 border-2 rounded-md" @blur="createBasicAuthHeader" type="password" v-model="password" placeholder="Password"/>
+        </div>
     </div>
 </template>

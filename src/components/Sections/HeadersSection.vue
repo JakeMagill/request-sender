@@ -8,7 +8,6 @@ import DefaultButton from '../Shared/DefaultButton.vue'
 import type { HeaderRecord } from '../../types/headerRecord'
 
 const store = useRequestStore();
-const headers = computed(() => store.state.headers)
 
 function addHeader() {
     store.addHeader({
@@ -22,7 +21,7 @@ function addHeader() {
 <template>
     <BaseSection :title="'Headers'">
             <div>
-                <HeaderRow v-for="item in headers" :key="item.id" :header="item"  @UPDATE_HEADER="store.updateHeader"/>
+                <HeaderRow v-for="item in store.headers" :key="item.id" :header="item"  @UPDATE_HEADER="store.updateHeader"/>
                 <div class="flex justify-center">
                     <DefaultButton @click="addHeader">Add Header</DefaultButton>
                 </div>

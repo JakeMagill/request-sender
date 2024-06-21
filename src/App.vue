@@ -9,18 +9,17 @@ import { useRequestStore } from './stores/requestStore';
 
 import type { formSubmission } from './types/formSubmission'
 
-const requestStore = useRequestStore();
+const store = useRequestStore();
 
 const submissionResponse = ref('');
 const statusCode = ref(0);
 const statusText = ref('');
 
 function sendRequest(request: formSubmission): void{
-  console.log(requestStore.requestHeaders)
 
   fetch(request.endPoint.href, {
     method: request.type, 
-    headers: requestStore.requestHeaders,
+    headers: store.enabledRequestHeaders,
   })
   .then((result) => {
     statusCode.value = result.status;
