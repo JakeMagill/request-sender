@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import BaseSection from './Base/BaseSection.vue';
-import { useRequestStore } from '../../stores/requestStore';
 import DefaultButton from '../Shared/DefaultButton.vue';
 
-const store = useRequestStore();
 </script>
 
 <template>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import HeaderRow from '../Headers/HeaderRow.vue'
 import BaseSection from './Base/BaseSection.vue'
 import { useRequestStore } from '../../stores/requestStore'
