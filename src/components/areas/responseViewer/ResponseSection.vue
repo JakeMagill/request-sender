@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import JsonViewer from 'vue-json-viewer'
-import BaseSection from './Base/BaseSection.vue';
+import BaseSection from '../requestEditor/sections/base/BaseSection.vue';
 import { computed } from 'vue';
 
 const props = defineProps<{
@@ -24,12 +24,15 @@ const responseBorderColor = computed(() => {
 </script>
 
 <template>
-    <BaseSection :title="'Response'">
+    <div class="w-full border rounded-md mb-6 p-2">
+        <div class="flex nowrap justify-between">
+            <p class="text-gray-400 p-2">Response</p>
+        </div>
         <div v-show="Number(statusCode) > 0" class="flex nowrap justify-between p-2">
             <p> {{ statusCode }} {{ statusText }} </p>
         </div>
         <div :class="responseBorderColor" class="w-full border-2 rounded-md p-2" v-if="response != ''">
             <JsonViewer :value="response" :copyable="true" :expanded="true" />
         </div>
-    </BaseSection>
+    </div>
 </template>

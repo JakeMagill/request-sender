@@ -1,12 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import EndpointForm  from './components/EndpointForm.vue'
-import ResponseSection from './components/Sections/ResponseSection.vue'
-import HeaderSection from './components/Sections/HeadersSection.vue'
-import QueryParamSection from './components/Sections/QueryParamSection.vue'
-import AuthSection from './components/Sections/AuthSection.vue';
+import ParameterEditor from './components/areas/requestEditor/ParameterEditor.vue';
+import ResponseSection from './components/areas/responseViewer/ResponseSection.vue'
 import { useRequestStore } from './stores/requestStore';
-
 import type { formSubmission } from './types/formSubmission'
 
 const store = useRequestStore();
@@ -32,14 +28,14 @@ function sendRequest(request: formSubmission): void{
 </script>
 
 <template>
-  <div class="flex flex-column flex-wrap justify-center items-center">
-    <div class="flex flex-column w-1/3 h-full pl-6">
+  <div class="flex flex-row justify-center p-3 border-b-4">
+    <h2>Request Sender</h2>
+  </div>
+  <div class="flex flex-column flex-wrap justify-start h-screen items-start">
+    <div class="flex flex-column w-1/3 pl-3">
     </div>
-    <div class="flex flex-wrap  w-2/3 p-6">
-      <EndpointForm @submitted="sendRequest"/>
-      <AuthSection />
-      <HeaderSection />
-      <QueryParamSection />
+    <ParameterEditor /> 
+    <div class="flex flex-wrap w-1/3 p-3">
       <ResponseSection :response="submissionResponse" :statusCode="statusCode" :statusText="statusText"/>
     </div>
   </div>

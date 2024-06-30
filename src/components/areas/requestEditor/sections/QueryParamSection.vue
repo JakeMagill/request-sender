@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BaseSection from './Base/BaseSection.vue';
-import DefaultButton from '../Shared/DefaultButton.vue';
+import BaseSection from './base/BaseSection.vue';
+import DefaultButton from '../../../shared/DefaultButton.vue';
 
 </script>
 
