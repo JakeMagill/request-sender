@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import HeaderRow from '../Headers/HeaderRow.vue'
-import BaseSection from './Base/BaseSection.vue'
-import { useRequestStore } from '../../stores/requestStore'
-import DefaultButton from '../Shared/DefaultButton.vue'
+import HeaderRow from '../headers/HeaderRow.vue'
+import BaseSection from './base/BaseSection.vue'
+import { useRequestStore } from '../../../../stores/requestStore'
+import DefaultButton from '../../../shared/DefaultButton.vue'
 
-import type { HeaderRecord } from '../../types/headerRecord'
+import type { HeaderRecord } from '../../../../types/headerRecord'
 
 const store = useRequestStore();
 

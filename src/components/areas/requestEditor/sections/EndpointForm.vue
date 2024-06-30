@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { RequestTypes } from '../enums/RequestTypes'
-import { setRequestColour } from '../helpers/requestColourHelper'
-import { useRequestStore } from '../stores/requestStore' 
-import type { formSubmission } from '../types/formSubmission'
+import { RequestTypes } from '../../../../enums/RequestTypes'
+import { setRequestColour } from '../../../../helpers/requestColourHelper'
+import { useRequestStore } from '../../../../stores/requestStore' 
+import type { formSubmission } from '../../../../types/formSubmission'
 
 const store = useRequestStore();
 const emits = defineEmits(['submitted']);
@@ -27,7 +27,7 @@ function submitEndpoint() {
 </script>
 
 <template>
-    <div :class="`border${store.requestColor}`" class="flex flex-nowrap text-center border-2 rounded-md p-2 w-full">
+    <div :class="`border${store.requestColor}`" class="flex flex-nowrap text-center border-2 border-gray-200 rounded-md mb-6 p-2 w-full">
         <select :class="`text${store.requestColor}`" class="font-bold" v-model="requestType" @change="setEndpontColor()">
             <option v-for="(type, index) in RequestTypes" :key="index" :value="type">
                 {{ type }}
