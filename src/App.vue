@@ -13,6 +13,6 @@ import Column from './components/layout/Column.vue';
       <p class="text-gray-500">Request</p>
     </Column>
     <ParameterEditor /> 
-    <ResponseSection :response="submissionResponse" :statusCode="statusCode" :statusText="statusText"/>
+    <ResponseSection />
   </div>
 </template>

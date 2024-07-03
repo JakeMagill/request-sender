@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { HeaderRecord } from '../../types/headerRecord';
+import { HeaderRecord } from '../../../../types/headerRecord';
 
 const props = defineProps<{
     header: HeaderRecord
