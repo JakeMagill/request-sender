@@ -7,7 +7,11 @@ import { useResponseStore } from '../../../stores/responseStore';
 const store = useResponseStore();
 
 const statusCode = store.responseStatus;
-const response = store.responseBody;
+
+const response = computed(() => {
+    return store.responseBody
+});
+
 const statusText = store.responseStatusText;
 
 const responseBorderColor = computed(() => {

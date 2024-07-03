@@ -7,12 +7,12 @@ import QueryParamSection from './sections/QueryParamSection.vue'
 import Column from '../../layout/Column.vue'
 import { useRequestStore } from '../../../stores/requestStore';
 import type { formSubmission } from '../../../types/formSubmission'
+import { useResponseStore } from '../../../stores/responseStore';
 
 const store = useRequestStore();
+const responseStore = useResponseStore();
 
-const submissionResponse = ref('');
-const statusCode = ref(0);
-const statusText = ref('');
+
 
 function sendRequest(request: formSubmission): void{
     fetch(request.endPoint.href, {
@@ -20,12 +20,12 @@ function sendRequest(request: formSubmission): void{
         headers: store.enabledRequestHeaders,
     })
     .then((result) => {
-        statusCode.value = result.status;
-        statusText.value = result.statusText;
+        responseStore.responseStatus = result.status;
+        responseStore.responseStatusText = result.statusText;
         return result.json();
     })
-    .then((data) => submissionResponse.value = data)
-    .catch(() => submissionResponse.value = '');
+    .then((data) => responseStore.responseBody = data)
+    .catch(() => responseStore.responseBody = '');
 }
 </script>
 
