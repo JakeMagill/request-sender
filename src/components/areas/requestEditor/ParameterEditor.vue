@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import EndpointForm  from './sections/EndpointForm.vue'
 import HeaderSection from './sections/HeadersSection.vue'
 import AuthSection from './sections/AuthSection.vue';
