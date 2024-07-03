@@ -4,6 +4,7 @@ import EndpointForm  from './sections/EndpointForm.vue'
 import HeaderSection from './sections/HeadersSection.vue'
 import AuthSection from './sections/AuthSection.vue';
 import QueryParamSection from './sections/QueryParamSection.vue'
+import Column from '../../layout/Column.vue'
 import { useRequestStore } from '../../../stores/requestStore';
 import type { formSubmission } from '../../../types/formSubmission'
 
@@ -29,10 +30,10 @@ function sendRequest(request: formSubmission): void{
 </script>
 
 <template>
-    <div class="flex flex-wrap  w-1/3 p-3">
-      <EndpointForm @submitted="sendRequest"/>
-      <AuthSection />
-      <HeaderSection />
-      <QueryParamSection />
-    </div>
+    <Column>
+        <EndpointForm @submitted="sendRequest"/>
+        <AuthSection />
+        <HeaderSection />
+        <QueryParamSection />
+    </Column>
 </template>

@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import { useRequestStore } from '../../stores/requestStore'
-
-const store = useRequestStore()
 </script>
 
 <template>
- <button :class="`bg${store.requestColor}`" class="p-2 px-4 mx-2 rounded-md text-white hover:opacity-85 transition-opacity">
+ <button class="p-2 px-4 mx-2 rounded-md text-white bg-mint-700 hover:bg-mint-500 transition-all">
     <slot></slot>
  </button>
 </template>
