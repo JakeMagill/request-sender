@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DefaultButton from '../../../shared/DefaultButton.vue';
+import DefaultButton from '../../../shared/Button.vue';
 import BaseSection from './base/BaseSection.vue';
 
 

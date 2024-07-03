@@ -2,7 +2,7 @@
 import HeaderRow from '../headers/HeaderRow.vue'
 import BaseSection from './base/BaseSection.vue'
 import { useRequestStore } from '../../../../stores/requestStore'
-import DefaultButton from '../../../shared/DefaultButton.vue'
+import DefaultButton from '../../../shared/Button.vue'
 
 import type { HeaderRecord } from '../../../../types/headerRecord'
 

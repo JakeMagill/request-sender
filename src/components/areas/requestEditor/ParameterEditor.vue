@@ -11,8 +11,6 @@ import { useResponseStore } from '../../../stores/responseStore';
 const store = useRequestStore();
 const responseStore = useResponseStore();
 
-
-
 function sendRequest(request: formSubmission): void{
     fetch(request.endPoint.href, {
         method: request.type, 
