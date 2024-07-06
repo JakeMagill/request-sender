@@ -7,7 +7,7 @@ import BaseSection from './base/BaseSection.vue';
 
 <template>
     <BaseSection :title="'Query Parameters'">
-        <div class="flex justify-center">
+        <div class="flex my-2 justify-center">
             <Button @click="">Add Query Param</Button>
         </div>
     </BaseSection>
