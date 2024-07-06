@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import JsonViewer from 'vue-json-viewer'
+import VueJsonPretty from 'vue-json-pretty'
 import { computed } from 'vue';
-import Column from '../../layout/Column.vue';
 import { useResponseStore } from '../../../stores/responseStore';
+import ColumnSmall from '../../structure/columns/ColumnSmall.vue';
+import AreaTitle from '../../structure/AreaTitle.vue';
 
 const store = useResponseStore();
 
@@ -29,15 +30,13 @@ const responseBorderColor = computed(() => {
 </script>
 
 <template>
-    <Column>
-        <div class="flex nowrap justify-between">
-            <p class="text-gray-500">Response</p>
-        </div>
+    <ColumnSmall>
+        <AreaTitle>Response</AreaTitle>
         <div v-show="Number(statusCode) > 0" class="flex nowrap justify-between p-2">
             <p> {{ statusCode }} {{ statusText }} </p>
         </div>
-        <div :class="responseBorderColor" class="w-full border-2 rounded-md p-2" v-if="response != ''">
-            <JsonViewer :value="response" :copyable="true" :expanded="true" />
+        <div :class="responseBorderColor" class="w-full h-full max-h-full border-2 rounded-md" v-if="response != ''">
+            <vue-json-pretty :data="response" :deep="1" :virtual="true"/>
         </div>
-    </Column>
+    </ColumnSmall>
 </template>

@@ -25,11 +25,11 @@ function updateHeader() {
 </script>
 
 <template>
-    <div class="flex no-wrap m-2">
+    <div class="flex items-center no-wrap m-2">
         <!--Make text fields a component-->
         <input class="w-1/2 p-2 mr-2 border-2 rounded-md text-gray-500 bg-midnight-600 border-gray-500" @blur="updateHeader" type="text" placeholder="key" :disabled="!enabled" v-model="headerKey" />
         <input class="w-1/2 p-2 mr-2 border-2 rounded-md text-gray-500 bg-midnight-600 border-gray-500" @blur="updateHeader" type="text" placeholder="value" :disabled="!enabled" v-model="headerValue" />
-        <input type="checkbox" @change="updateHeader" v-model="enabled">
+        <input type="checkbox" class="rounded-sm border-2 checked:bg-mint-700 bg-midnight-600" @change="updateHeader" v-model="enabled">
         <hr>
     </div>
 </template>

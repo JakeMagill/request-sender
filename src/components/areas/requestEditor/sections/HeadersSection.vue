@@ -2,9 +2,8 @@
 import HeaderRow from '../headers/HeaderRow.vue'
 import BaseSection from './base/BaseSection.vue'
 import { useRequestStore } from '../../../../stores/requestStore'
-import DefaultButton from '../../../shared/Button.vue'
-
 import type { HeaderRecord } from '../../../../types/headerRecord'
+import Button from '../../../structure/buttons/Button.vue'
 
 const store = useRequestStore();
 
@@ -19,11 +18,9 @@ function addHeader() {
 
 <template>
     <BaseSection :title="'Headers'">
-            <div>
-                <HeaderRow v-for="item in store.headers" :key="item.id" :header="item"  @UPDATE_HEADER="store.updateHeader"/>
-                <div class="flex justify-center mt-2">
-                    <DefaultButton @click="addHeader">Add Header</DefaultButton>
-                </div>
-            </div>
+        <HeaderRow v-for="item in store.headers" :key="item.id" :header="item"  @UPDATE_HEADER="store.updateHeader"/>
+        <div class="flex justify-center mt-2">
+            <Button @click="addHeader">Add Header</Button>
+        </div>
     </BaseSection>
 </template>

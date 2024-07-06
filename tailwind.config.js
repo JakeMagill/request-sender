@@ -39,6 +39,8 @@ export default {
       "white": colors.white,
     }
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms')
+  ],
 }
 
