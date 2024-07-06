@@ -50,7 +50,7 @@ function addAuthHeader(headerValue: string) {
 
 <template>
     <BaseSection :title="'Authentication'">
-        <div class="flex flex-row justify-center w-full rounded-md p-2">
+        <div class="flex flex-row justify-center w-full rounded-md px-2 pb-2">
             <div class="w-1/2 pr-2 flex justify-between items-start">
                 <span class="pt-2 text-gray-500">Type</span>
                 <select v-model="authType" class="border-2 rounded-md text-gray-500 border-gray-500 bg-midnight-600">

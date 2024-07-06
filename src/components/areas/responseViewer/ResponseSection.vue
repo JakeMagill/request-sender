@@ -26,7 +26,6 @@ const responseBorderColor = computed(() => {
         return 'border-gray-500'
     }
 })
-
 </script>
 
 <template>
