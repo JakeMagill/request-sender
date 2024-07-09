@@ -1,38 +1,41 @@
 <script setup lang="ts">
-import JsonViewer from 'vue-json-viewer'
-import BaseSection from '../requestEditor/sections/base/BaseSection.vue';
 import { computed } from 'vue';
+import { useResponseStore } from '../../../stores/responseStore';
+import ColumnSmall from '../../structure/columns/ColumnSmall.vue';
+import AreaTitle from '../../structure/AreaTitle.vue';
+import JsonViewer from 'vue-json-viewer'
 
-const props = defineProps<{
-    response: String,
-    statusCode: Number,
-    statusText: String
-}>()
+const store = useResponseStore();
+
+const statusCode = store.responseStatus;
+
+const response = computed(() => {
+    return store.responseBody
+});
+
+const statusText = store.responseStatusText;
 
 const responseBorderColor = computed(() => {
-    if (Number(props.statusCode) >= 200 && Number(props.statusCode) < 300) {
+    if (Number(statusCode) >= 200 && Number(statusCode) < 300) {
         return 'border-green-500'
-    } else if (Number(props.statusCode) >= 300 && Number(props.statusCode) < 400) {
+    } else if (Number(statusCode) >= 300 && Number(statusCode) < 400) {
         return 'border-yellow-500'
-    } else if (Number(props.statusCode) >= 400 && Number(props.statusCode) < 500) {
+    } else if (Number(statusCode) >= 400 && Number(statusCode) < 500) {
         return 'border-red-500'
     } else {
         return 'border-gray-500'
     }
 })
-
 </script>
 
 <template>
-    <div class="w-full border rounded-md mb-6 p-2">
-        <div class="flex nowrap justify-between">
-            <p class="text-gray-400 p-2">Response</p>
-        </div>
+    <ColumnSmall>
+        <AreaTitle class="mb-2">Response</AreaTitle>
         <div v-show="Number(statusCode) > 0" class="flex nowrap justify-between p-2">
             <p> {{ statusCode }} {{ statusText }} </p>
         </div>
-        <div :class="responseBorderColor" class="w-full border-2 rounded-md p-2" v-if="response != ''">
-            <JsonViewer :value="response" :copyable="true" :expanded="true" />
+        <div :class="responseBorderColor" class="w-full h-[calc(100vh-150px)] border-2 rounded-md overflow-scroll">
+            <json-viewer :value="response" theme="jsonViewer" copyable v-if="response != ''" />
         </div>
-    </div>
+    </ColumnSmall>
 </template>

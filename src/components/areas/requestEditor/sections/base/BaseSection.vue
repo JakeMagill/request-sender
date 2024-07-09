@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRequestStore } from '../../../../../stores/requestStore'
+import AreaTitle from '../../../../structure/AreaTitle.vue';
 
 defineProps<{
     title: String
 }>()
 
-const store = useRequestStore()
 const isDisabled = ref(false)
 
 function toggleSection() {
@@ -20,11 +19,11 @@ function enableSection() {
 </script>
 
 <template>
-    <div class="w-full border border-gray-200 rounded-md mb-6 p-2">
-        <div class="flex nowrap justify-between">
-            <p class="text-gray-400 p-2">{{ title }}</p>
-            <a v-show="!isDisabled" :class="`text${store.requestColor}`" class="cursor-pointer p-2" @click="toggleSection">Hide</a>
-            <a v-show="isDisabled" :class="`text${store.requestColor}`" class="cursor-pointer p-2" @click="toggleSection">Show</a>
+    <div class="w-full border-gray-700 border-2 rounded-md mt-3">
+        <div class="flex nowrap p-2 justify-between align-middle">
+            <AreaTitle>{{ title }}</AreaTitle>
+            <a v-show="!isDisabled" class="cursor-pointer text-gray-500 hover:text-mint-700" @click="toggleSection">Hide</a>
+            <a v-show="isDisabled" class="cursor-pointer text-gray-500 hover:text-mint-700" @click="toggleSection">Show</a>
         </div>
         <div v-show="!isDisabled">
             <slot :enableSection="enableSection"></slot>

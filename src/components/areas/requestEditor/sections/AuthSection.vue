@@ -46,21 +46,20 @@ function addAuthHeader(headerValue: string) {
 
     store.updateHeader(authHeader);
 }
-
 </script>
 
 <template>
     <BaseSection :title="'Authentication'">
-        <div class="flex flex-row justify-center w-full border border-gray-200 rounded-md p-2">
-            <div class="w-1/2 p-2 flex justify-between items-start">
-                <span class="pt-2">Type</span>
-                <select v-model="authType" class="p-2 border-2 rounded-md">
+        <div class="flex flex-row justify-center w-full rounded-md px-2 pb-2">
+            <div class="w-1/2 pr-2 flex justify-between items-start">
+                <span class="pt-2 text-gray-500">Type</span>
+                <select v-model="authType" class="border-2 rounded-md text-gray-500 border-gray-500 bg-midnight-600">
                     <option v-for="(type, index) in AuthTypes" :key="index" :value="type">
                         {{ type }}
                     </option>
                 </select>
             </div>
-            <div class="w-1/2 p-2 border-l-2 flex justify-center">
+            <div class="w-1/2 pl-2 border-l-2 text-gray-500 border-gray-500 flex justify-center">
                 <p v-show="authType === AuthTypes.NO_AUTH">
                     This request will not use any authorization.
                 </p>
