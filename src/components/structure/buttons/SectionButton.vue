@@ -22,5 +22,5 @@ const buttonClasses = computed(() => {
 </script>
 
 <template>
-    <button :class="buttonClasses" class="rounded-full border border-mint-700 p-2 text-white transition-all duration-300" @click="SetActiveSection">{{ text }}</button>
+    <button :class="buttonClasses" class="max-h-12 rounded-full border border-mint-700 p-2 text-white transition-all duration-300" @click="SetActiveSection">{{ text }}</button>
 </template>

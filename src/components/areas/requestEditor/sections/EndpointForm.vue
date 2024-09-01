@@ -20,7 +20,7 @@ function submitEndpoint() {
 </script>
 
 <template>
-    <div class="flex flex-nowrap text-center border-2 border-gray-700 rounded-md mb-3 p-2 w-full">
+    <div class="flex flex-nowrap max-h-16 text-center border-2 border-gray-700 rounded-md p-2 w-full mb-3">
         <select class="font-bold border-none bg-midnight-600 text-mint-700" v-model="requestType">
             <option v-for="(type, index) in RequestTypes" :key="index" :value="type">
                 {{ type }}

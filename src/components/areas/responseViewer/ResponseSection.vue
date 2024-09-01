@@ -34,7 +34,7 @@ const responseBorderColor = computed(() => {
         <div v-show="Number(statusCode) > 0" class="flex nowrap justify-between p-2">
             <p> {{ statusCode }} {{ statusText }} </p>
         </div>
-        <div :class="responseBorderColor" class="w-full h-[calc(100vh-150px)] border-2 rounded-md overflow-scroll">
+        <div :class="responseBorderColor" class="w-full flex flex-col h-[calc(100vh-150px)] border-2 rounded-md overflow-scroll">
             <json-viewer :value="response" theme="jsonViewer" copyable v-if="response != ''" />
         </div>
     </ColumnSmall>

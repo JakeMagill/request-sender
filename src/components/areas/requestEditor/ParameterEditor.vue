@@ -10,6 +10,7 @@ import { ref } from 'vue';
 import ColumnLarge from '../../structure/columns/ColumnLarge.vue';
 import SectionButton from '../../structure/buttons/SectionButton.vue';
 import { RequestSections } from '../../../enums/RequestSections';
+import BodyEditor from './BodyEditor.vue';
 
 const store = useRequestStore();
 const responseStore = useResponseStore();
@@ -50,5 +51,6 @@ function sendRequest(request: formSubmission): void{
             <HeaderSection />
             <QueryParamSection />
         </div>
+        <BodyEditor v-show="activeSection === RequestSections.REQUEST_BODY"/>
     </ColumnLarge>
 </template>
